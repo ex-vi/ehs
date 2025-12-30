@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "coefficients",
+  "info": {
+    "singularName": "coefficient",
+    "pluralName": "coefficients",
+    "displayName": "Coefficient"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "slug": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "discount-once",
+        "discount-weekly",
+        "discount-biweekly",
+        "discount-monthly",
+        "house",
+        "suburbs"
+      ]
+    },
+    "coefficient": {
+      "type": "decimal",
+      "required": true,
+      "default": 1,
+      "min": 0
+    },
+    "applies_to": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "base",
+        "total"
+      ]
+    }
+  }
+}

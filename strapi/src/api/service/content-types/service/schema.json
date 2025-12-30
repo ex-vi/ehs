@@ -1,0 +1,196 @@
+{
+  "kind": "collectionType",
+  "collectionName": "services",
+  "info": {
+    "singularName": "service",
+    "pluralName": "services",
+    "displayName": "Service"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "slug": {
+      "type": "enumeration",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "enum": [
+        "standard",
+        "deep",
+        "move-in",
+        "after-renovation",
+        "kitchen",
+        "office",
+        "windows",
+        "staircases",
+        "renovations",
+        "painting",
+        "laminate-flooring",
+        "baseboard-installation",
+        "drywall-installation",
+        "vinyl-siding",
+        "insulations"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "service_price": {
+      "type": "decimal",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "default": 1,
+      "min": 0
+    },
+    "sqft_price": {
+      "type": "decimal",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "default": 0,
+      "min": 0
+    },
+    "worker_time": {
+      "type": "decimal",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "default": 0,
+      "min": 0
+    },
+    "client_time": {
+      "type": "decimal",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "default": 0,
+      "min": 0
+    },
+    "extra_bedroom_price": {
+      "type": "decimal",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "default": 0,
+      "min": 0
+    },
+    "extra_bedroom_worker_time": {
+      "type": "decimal",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "default": 0,
+      "min": 0
+    },
+    "extra_bedroom_client_time": {
+      "type": "decimal",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "default": 0,
+      "min": 0
+    },
+    "extra_bathroom_price": {
+      "type": "decimal",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "default": 0,
+      "min": 0
+    },
+    "extra_bathroom_worker_time": {
+      "type": "decimal",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "default": 0,
+      "min": 0
+    },
+    "extra_bathroom_client_time": {
+      "type": "decimal",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "default": 0,
+      "min": 0
+    },
+    "extra_kitchen_price": {
+      "type": "decimal",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "default": 0,
+      "min": 0
+    },
+    "extra_kitchen_worker_time": {
+      "type": "decimal",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "default": 0,
+      "min": 0
+    },
+    "extra_kitchen_client_time": {
+      "type": "decimal",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "default": 0,
+      "min": 0
+    }
+  }
+}

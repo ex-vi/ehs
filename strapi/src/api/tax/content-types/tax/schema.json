@@ -1,0 +1,22 @@
+{
+  "kind": "singleType",
+  "collectionName": "taxes",
+  "info": {
+    "singularName": "tax",
+    "pluralName": "taxes",
+    "displayName": "Tax"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "vat": {
+      "type": "decimal",
+      "required": true,
+      "unique": false,
+      "default": 0,
+      "min": 0
+    }
+  }
+}

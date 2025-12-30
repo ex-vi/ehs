@@ -1,0 +1,16 @@
+<svg width="83px" height="98px" viewBox="0 0 83 98" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="fridge">
+            <rect id="Rectangle" fill="#346AE5" fill-rule="nonzero" x="20" y="0" width="46" height="92"></rect>
+            <g id="Rectangle" transform="translate(20.000000, 33.000000)" fill="#126099" fill-rule="nonzero">
+                <rect x="3.36780328" y="60.0082301" width="3.27203279" height="4.99176991"></rect>
+                <rect x="39.3601639" y="60.0082301" width="3.27203279" height="4.99176991"></rect>
+                <rect x="0.0957704918" y="0.107182891" width="45.8082705" height="3.32784661"></rect>
+            </g>
+            <g id="Rectangle" transform="translate(26.000000, 8.000000)" fill="#CFCFCF" fill-rule="nonzero">
+                <rect x="0.0903333333" y="0.0750931677" width="2.89266667" height="21.7219503"></rect>
+                <rect x="0.0903333333" y="31.8223665" width="2.89266667" height="30.076354"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

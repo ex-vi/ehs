@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "feature_options",
+  "info": {
+    "singularName": "feature-option",
+    "pluralName": "feature-options",
+    "displayName": "Included Feature Option"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "text": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    }
+  }
+}

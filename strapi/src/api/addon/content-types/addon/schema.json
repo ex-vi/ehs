@@ -1,0 +1,89 @@
+{
+  "kind": "collectionType",
+  "collectionName": "addons",
+  "info": {
+    "singularName": "addon",
+    "pluralName": "addons",
+    "displayName": "Addon"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "slug": {
+      "type": "enumeration",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "enum": [
+        "oven",
+        "range-hood",
+        "kitchen-cabinets",
+        "dishwashing",
+        "fridge",
+        "microwave",
+        "balcony",
+        "window",
+        "ironing",
+        "litter-box",
+        "extra-hours",
+        "closet",
+        "dishwasher-machine",
+        "vacuum-cleaner",
+        "laundry",
+        "gardines",
+        "pet-cleaning"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "price": {
+      "type": "decimal",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "default": 1,
+      "min": 0
+    },
+    "worker_time": {
+      "type": "decimal",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "default": 0,
+      "min": 0
+    },
+    "client_time": {
+      "type": "decimal",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "default": 0,
+      "min": 0
+    }
+  }
+}
