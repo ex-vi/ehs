@@ -38,6 +38,7 @@ export const SERVICES_WITH_DISCOUNTS = [
 
 export const ADDON_ORDER = [
   "fridge",
+  "double-fridge",
   "oven",
   "microwave",
   "range-hood",
@@ -46,9 +47,12 @@ export const ADDON_ORDER = [
   "ironing",
   "laundry",
   "window",
+  "gardines",
+  "balcony",
   "closet",
   "pet-cleaning",
   "litter-box",
+  "extra-hours",
 ] as const;
 
 export const RENOVATION_SERVICES_ORDER = [

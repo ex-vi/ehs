@@ -14,7 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { updateOrderFeedback } from "@/views/orders/fetchers";
+import { updateOrderFeedback } from "@/views/orders/fetchers/client";
 
 import { OrderStatusBadge, PaymentStatusBadge } from "./utils";
 

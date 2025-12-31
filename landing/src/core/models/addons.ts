@@ -15,6 +15,7 @@ export type AddonSlug =
   | "range-hood"
   | "dishwashing"
   | "fridge"
+  | "double-fridge"
   | "microwave"
   | "balcony"
   | "window"

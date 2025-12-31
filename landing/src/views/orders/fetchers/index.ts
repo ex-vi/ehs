@@ -1,3 +1,5 @@
+import "server-only";
+
 import { CreateOrderRequest } from "@/core/forms/orders/create";
 import { PaginatedDataResponse } from "@/core/models/common";
 import { Order } from "@/core/models/orders";

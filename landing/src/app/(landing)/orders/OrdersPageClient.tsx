@@ -3,7 +3,7 @@
 import { useCallback, useState } from "react";
 
 import { Order } from "@/core/models/orders";
-import { fetchOrders } from "@/views/orders/fetchers";
+import { fetchOrders } from "@/views/orders/fetchers/client";
 import { OrdersTable } from "@/views/orders/OrdersTable";
 
 interface OrdersPageClientProps {

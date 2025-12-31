@@ -98,7 +98,7 @@ const translation = {
         included: [
           "Organizing clothes, shoes, and general items",
           "Dusting all open and reachable surfaces",
-          "Vacuuming carpets and mopping all floors",
+          "Vacuuming carpets, mopping all floors and baseboards",
           "Cleaning bathroom fixtures and disinfecting surfaces",
           "Wiping mirrors, windowsills, doors, and switches",
           "Tidying kitchen surfaces and furniture fronts",
@@ -112,7 +112,7 @@ const translation = {
         badge: "Most Popular",
         included: [
           "Everything from the Standard Cleaning package",
-          "Organization of items in wardrobes",
+          "Mopping baseboards, wiping cornices and window blinds",
           "Vacuuming sofas and upholstered furniture",
           "Dry wiping of walls to remove dust",
           "Cleaning light fixtures",
