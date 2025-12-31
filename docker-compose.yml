@@ -41,3 +41,4 @@ services:
     environment:
       PUBLIC_URL: ${LANDING_PUBLIC_URL}
       STRAPI_BASE_URL: ${STRAPI_BASE_URL}
+      DATABASE_URL: ${DATABASE_URL}
