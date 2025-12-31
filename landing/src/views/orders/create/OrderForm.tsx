@@ -106,6 +106,7 @@ const getAddonIcon = (slug: AddonSlug): string => {
     dishwashing: "/services/dishes.svg",
     "extra-hours": "/services/hours.svg",
     fridge: "/services/fridge.svg",
+    "double-fridge": "/services/double-fridge.svg",
     ironing: "/services/ironing.svg",
     "litter-box": "/services/tray.svg",
     microwave: "/services/microwave.svg",

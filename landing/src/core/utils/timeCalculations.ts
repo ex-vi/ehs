@@ -9,18 +9,17 @@ export function calculateWorkerTime(formData: OrderFormData, services: Service[]
 
   if (selectedService) {
     const hasBaseRooms = SERVICES_WITH_BASE_ROOMS.includes(selectedService.slug as any);
+    const isKitchenService = selectedService.slug === "kitchen";
 
     totalMinutes += selectedService.worker_time;
 
-    if (hasBaseRooms) {
-      totalMinutes += Math.max(0, formData.rooms - 1) * selectedService.extra_bedroom_worker_time;
-      totalMinutes += Math.max(0, formData.bathrooms - 1) * selectedService.extra_bathroom_worker_time;
-      totalMinutes += Math.max(0, formData.kitchens - 1) * selectedService.extra_kitchen_worker_time;
-    } else {
-      totalMinutes += formData.rooms * selectedService.extra_bedroom_worker_time;
-      totalMinutes += formData.bathrooms * selectedService.extra_bathroom_worker_time;
-      totalMinutes += formData.kitchens * selectedService.extra_kitchen_worker_time;
-    }
+    const extraRooms = hasBaseRooms ? Math.max(0, formData.rooms - 1) : formData.rooms;
+    const extraBathrooms = hasBaseRooms ? Math.max(0, formData.bathrooms - 1) : formData.bathrooms;
+    const extraKitchens = hasBaseRooms || isKitchenService ? Math.max(0, formData.kitchens - 1) : formData.kitchens;
+
+    totalMinutes += extraRooms * selectedService.extra_bedroom_worker_time;
+    totalMinutes += extraBathrooms * selectedService.extra_bathroom_worker_time;
+    totalMinutes += extraKitchens * selectedService.extra_kitchen_worker_time;
   }
 
   Object.entries(formData.selected_services).forEach(([addonSlug, quantity]) => {
@@ -47,18 +46,17 @@ export function calculateClientTime(formData: OrderFormData, services: Service[]
 
   if (selectedService) {
     const hasBaseRooms = SERVICES_WITH_BASE_ROOMS.includes(selectedService.slug as any);
+    const isKitchenService = selectedService.slug === "kitchen";
 
     totalMinutes += selectedService.client_time;
 
-    if (hasBaseRooms) {
-      totalMinutes += Math.max(0, formData.rooms - 1) * selectedService.extra_bedroom_client_time;
-      totalMinutes += Math.max(0, formData.bathrooms - 1) * selectedService.extra_bathroom_client_time;
-      totalMinutes += Math.max(0, formData.kitchens - 1) * selectedService.extra_kitchen_client_time;
-    } else {
-      totalMinutes += formData.rooms * selectedService.extra_bedroom_client_time;
-      totalMinutes += formData.bathrooms * selectedService.extra_bathroom_client_time;
-      totalMinutes += formData.kitchens * selectedService.extra_kitchen_client_time;
-    }
+    const extraRooms = hasBaseRooms ? Math.max(0, formData.rooms - 1) : formData.rooms;
+    const extraBathrooms = hasBaseRooms ? Math.max(0, formData.bathrooms - 1) : formData.bathrooms;
+    const extraKitchens = hasBaseRooms || isKitchenService ? Math.max(0, formData.kitchens - 1) : formData.kitchens;
+
+    totalMinutes += extraRooms * selectedService.extra_bedroom_client_time;
+    totalMinutes += extraBathrooms * selectedService.extra_bathroom_client_time;
+    totalMinutes += extraKitchens * selectedService.extra_kitchen_client_time;
   }
 
   Object.entries(formData.selected_services).forEach(([addonSlug, quantity]) => {

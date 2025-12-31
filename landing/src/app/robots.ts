@@ -1,11 +1,13 @@
 import { MetadataRoute } from "next";
 
+import { PUBLIC_URL } from "@/core/constants/common";
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: process.env.PUBLIC_URL + "/sitemap.xml",
+    sitemap: PUBLIC_URL + "/sitemap.xml",
   };
 }

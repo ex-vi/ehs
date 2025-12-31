@@ -171,62 +171,67 @@ const validationSchema = Yup.object({
   renovation_services: Yup.object().optional(),
 });
 
-const createInitialValues = (searchParams: Record<string, string>): CreateOrderFormValues => ({
-  service_type: searchParams.service || searchParams.service_type || "standard",
-  rooms: parseInt(searchParams.rooms || "1", 10),
-  bathrooms: parseInt(searchParams.bathrooms || "1", 10),
-  kitchens: parseInt(searchParams.kitchens || "1", 10),
-  windows: parseInt(searchParams.windows || "5", 10),
-  square_feet: searchParams.square_feet || "1",
-  building_type: (searchParams.building_type as "Apartment" | "House") || "Apartment",
-  selected_date:
-    searchParams.date ||
-    (() => {
-      const d = new Date();
-      d.setHours(12, 0, 0, 0);
-      const y = d.getFullYear();
-      const m = String(d.getMonth() + 1).padStart(2, "0");
-      const day = String(d.getDate()).padStart(2, "0");
-      return `${y}-${m}-${day}`;
-    })(),
-  selected_time: searchParams.time || "10:00",
-  reconfirm: searchParams.reconfirm === "true",
-  frequency: (searchParams.frequency as Cadence) || "discount-once",
-  selected_services: Object.fromEntries(
-    Object.entries(searchParams)
-      .filter(([key]) => key.startsWith("addon_"))
-      .map(([key, value]) => [key.replace("addon_", ""), parseInt(value as string, 10) || 1])
-  ),
-  is_vacuum_selected: searchParams.vacuum === "true",
-  address: {
-    street: searchParams.street || "",
-    unit: searchParams.unit || "",
-    city: searchParams.city || "",
-    province: searchParams.province || "",
-    entry_instructions: searchParams.entry_instructions || "",
-    zip_code: searchParams.zip_code || "",
-  },
-  contact: {
-    first_name: searchParams.first_name || "",
-    last_name: searchParams.last_name || "",
-    email: searchParams.email || "",
-    phone: searchParams.phone || "",
-    other_instructions: searchParams.other_instructions || "",
-  },
-  payment_method: searchParams.payment_method || "Cash or card on site",
-  vat_info: {
-    company_name: searchParams.company_name || "",
-    vat_number: searchParams.vat_number || "",
-    billing_address: searchParams.billing_address || "",
-    invoice_email: searchParams.invoice_email || "",
-    contact_person: searchParams.contact_person || "",
-    phone_number: searchParams.phone_number || "",
-  },
-  agreements: {
-    terms: false,
-    consent: false,
-    create_profile: false,
-  },
-  // TEMPORARY: Renovation services support - can be easily removed
-  renovation_services: {},
-});
+const createInitialValues = (searchParams: Record<string, string>): CreateOrderFormValues => {
+  const service_type = searchParams.service || searchParams.service_type || "standard";
+  const isKitchen = service_type === "kitchen";
+
+  return {
+    service_type,
+    rooms: parseInt(searchParams.rooms || (isKitchen ? "0" : "1"), 10),
+    bathrooms: parseInt(searchParams.bathrooms || (isKitchen ? "0" : "1"), 10),
+    kitchens: parseInt(searchParams.kitchens || (isKitchen ? "1" : "1"), 10),
+    windows: parseInt(searchParams.windows || (isKitchen ? "0" : "5"), 10),
+    square_feet: searchParams.square_feet || "1",
+    building_type: (searchParams.building_type as "Apartment" | "House") || "Apartment",
+    selected_date:
+      searchParams.date ||
+      (() => {
+        const d = new Date();
+        d.setHours(12, 0, 0, 0);
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+        return `${y}-${m}-${day}`;
+      })(),
+    selected_time: searchParams.time || "10:00",
+    reconfirm: searchParams.reconfirm === "true",
+    frequency: (searchParams.frequency as Cadence) || "discount-once",
+    selected_services: Object.fromEntries(
+      Object.entries(searchParams)
+        .filter(([key]) => key.startsWith("addon_"))
+        .map(([key, value]) => [key.replace("addon_", ""), parseInt(value as string, 10) || 1])
+    ),
+    is_vacuum_selected: searchParams.vacuum === "true",
+    address: {
+      street: searchParams.street || "",
+      unit: searchParams.unit || "",
+      city: searchParams.city || "",
+      province: searchParams.province || "",
+      entry_instructions: searchParams.entry_instructions || "",
+      zip_code: searchParams.zip_code || "",
+    },
+    contact: {
+      first_name: searchParams.first_name || "",
+      last_name: searchParams.last_name || "",
+      email: searchParams.email || "",
+      phone: searchParams.phone || "",
+      other_instructions: searchParams.other_instructions || "",
+    },
+    payment_method: searchParams.payment_method || "Cash or card on site",
+    vat_info: {
+      company_name: searchParams.company_name || "",
+      vat_number: searchParams.vat_number || "",
+      billing_address: searchParams.billing_address || "",
+      invoice_email: searchParams.invoice_email || "",
+      contact_person: searchParams.contact_person || "",
+      phone_number: searchParams.phone_number || "",
+    },
+    agreements: {
+      terms: false,
+      consent: false,
+      create_profile: false,
+    },
+    // TEMPORARY: Renovation services support - can be easily removed
+    renovation_services: {},
+  };
+};

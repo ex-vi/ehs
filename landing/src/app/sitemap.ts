@@ -1,33 +1,35 @@
 import { MetadataRoute } from "next";
 
+import { PUBLIC_URL } from "@/core/constants/common";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: process.env.PUBLIC_URL + "",
+      url: PUBLIC_URL + "",
       lastModified: new Date(),
     },
     {
-      url: process.env.PUBLIC_URL + "/login",
+      url: PUBLIC_URL + "/login",
       lastModified: new Date(),
     },
     {
-      url: process.env.PUBLIC_URL + "/orders",
+      url: PUBLIC_URL + "/orders",
       lastModified: new Date(),
     },
     {
-      url: process.env.PUBLIC_URL + "/orders/create",
+      url: PUBLIC_URL + "/orders/create",
       lastModified: new Date(),
     },
     {
-      url: process.env.PUBLIC_URL + "/privacy-policy",
+      url: PUBLIC_URL + "/privacy-policy",
       lastModified: new Date(),
     },
     {
-      url: process.env.PUBLIC_URL + "/terms-of-service",
+      url: PUBLIC_URL + "/terms-of-service",
       lastModified: new Date(),
     },
     {
-      url: process.env.PUBLIC_URL + "/cookie-policy",
+      url: PUBLIC_URL + "/cookie-policy",
       lastModified: new Date(),
     },
   ];

@@ -58,11 +58,14 @@ export default function ReactiveOrderSummary({
       return services[0]?.slug || "standard";
     };
 
+    const resolvedService = getServiceFromUrl();
+    const isKitchen = resolvedService === "kitchen";
+
     const baseFormData: OrderFormData = {
-      service_type: getServiceFromUrl(),
-      rooms: parseInt(searchParams.get("rooms") || "1", 10),
-      bathrooms: parseInt(searchParams.get("bathrooms") || "1", 10),
-      kitchens: parseInt(searchParams.get("kitchens") || "1", 10),
+      service_type: resolvedService,
+      rooms: parseInt(searchParams.get("rooms") || (isKitchen ? "0" : "1"), 10),
+      bathrooms: parseInt(searchParams.get("bathrooms") || (isKitchen ? "0" : "1"), 10),
+      kitchens: parseInt(searchParams.get("kitchens") || (isKitchen ? "1" : "1"), 10),
       building_type: (searchParams.get("buildingType") as "Apartment" | "House") || "Apartment",
       selected_date: searchParams.get("date") || dayjs().format("YYYY-MM-DD"),
       selected_time: searchParams.get("time") || "10:00",
