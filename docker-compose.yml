@@ -1,0 +1,43 @@
+services:
+  strapi:
+    build:
+      context: ./strapi
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:1337:1337"
+    environment:
+      HOST: ${STRAPI_HOST}
+      PORT: ${STRAPI_PORT}
+      PUBLIC_URL: ${STRAPI_PUBLIC_URL}
+      LOG_LEVEL: ${STRAPI_LOG_LEVEL}
+
+      APP_KEYS: ${APP_KEYS}
+      API_TOKEN_SALT: ${API_TOKEN_SALT}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT}
+      JWT_SECRET: ${JWT_SECRET}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_SCHEMA: ${DATABASE_SCHEMA}
+
+      BUCKET_NAME: ${BUCKET_NAME}
+      BUCKET_REGION: ${BUCKET_REGION}
+      BUCKET_ENDPOINT: ${BUCKET_ENDPOINT}
+      BUCKET_ACCESS_KEY: ${BUCKET_ACCESS_KEY}
+      BUCKET_SECRET_KEY: ${BUCKET_SECRET_KEY}
+
+  landing:
+    build:
+      context: ./landing
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      PUBLIC_URL: ${LANDING_PUBLIC_URL}
+      STRAPI_BASE_URL: ${STRAPI_BASE_URL}
