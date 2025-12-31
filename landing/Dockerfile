@@ -1,5 +1,8 @@
 FROM node:24-alpine AS base
 
+# Ensure the container has an up-to-date system CA bundle for outbound HTTPS.
+RUN apk add --no-cache ca-certificates && update-ca-certificates
+
 # Install dependencies
 FROM base AS deps
 
