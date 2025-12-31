@@ -41,7 +41,7 @@ function getPgPool(): Pool {
     throw new Error("DATABASE_URL is required for Jobber token storage");
   }
 
-  globalThis.__jobberPgPool = new Pool({ connectionString });
+  globalThis.__jobberPgPool = new Pool({ connectionString, ssl: { rejectUnauthorized: false } });
   return globalThis.__jobberPgPool;
 }
 

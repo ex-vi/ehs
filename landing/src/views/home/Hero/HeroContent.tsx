@@ -1,4 +1,5 @@
 import { Chewy } from "next/font/google";
+import Image from "next/image";
 
 import { cn } from "@/core/lib/utils";
 import { commonTranslation } from "@/core/translations/common";
@@ -13,39 +14,13 @@ export async function HeroContent() {
         lineHeight: "normal",
       }}
     >
-      <h1
-        className={cn(
-          chewy.className,
-          "relative inline-block text-[62px] leading-[70px] tracking-[-5px] text-white sm:text-[88px] sm:leading-[111px] md:max-w-[80%] lg:text-[104px]"
-        )}
-      >
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-0 text-transparent select-none"
-          style={{
-            WebkitTextStrokeWidth: "10px",
-            WebkitTextStrokeColor: "var(--esg-blue)",
-          }}
-        >
-          Easy Home Services
-        </span>
-
-        <span
-          className="relative text-white"
-          style={{
-            fontSynthesis: "weight",
-            fontWeight: 500,
-
-            textShadow: `
-        0 0 0.6px #fff,
-        0 0 0.6px #fff,
-        0 0 0.6px #fff
-      `,
-          }}
-        >
-          Easy Home Services
-        </span>
-      </h1>
+      <Image
+        src="/heroName.svg"
+        alt="Hero Image"
+        className="w-full max-[1025px]:max-w-[420] min-[1025px]:max-w-[660px]"
+        width={312}
+        height={130}
+      />
 
       <p
         style={{
@@ -54,7 +29,10 @@ export async function HeroContent() {
           color: "white",
           textShadow: "0 0 1px var(--esg-blue)",
         }}
-        className={cn(chewy.className, "text-[32px] font-bold text-white sm:text-[48px] lg:text-[64px]")}
+        className={cn(
+          chewy.className,
+          "text-[32px] font-bold text-white max-[1025px]:text-[48px] min-[1025px]:text-[64px]"
+        )}
       >
         {commonTranslation.cleaningAndRenovations}
       </p>

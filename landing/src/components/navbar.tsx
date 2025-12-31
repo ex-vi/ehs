@@ -11,7 +11,7 @@ export type ActionButton = {
 const DEFAULT_ACTION_BUTTONS: readonly ActionButton[] = [
   {
     label: "Login",
-    href: "/login",
+    href: "https://clienthub.getjobber.com/client_hubs/beb89d28-6376-486e-b031-a0724d28a0a4/login/new?source=share_login",
     variant: "blue",
   },
 ] as const;
