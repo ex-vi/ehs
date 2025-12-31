@@ -23,6 +23,8 @@ const STEP_SECTIONS: Record<string, SectionId[]> = {
 export default function FixedBreadcrumbs({ total }: { total: number }) {
   const { activeSection, scrollToSection } = useScrollSpy(300);
 
+  const formattedTotal = Number.isFinite(total) ? total.toFixed(2) : "0.00";
+
   const listRef = useRef<HTMLOListElement>(null);
   const firstRef = useRef<HTMLLIElement>(null);
   const secondRef = useRef<HTMLLIElement>(null);
@@ -65,7 +67,7 @@ export default function FixedBreadcrumbs({ total }: { total: number }) {
         </div>
         <Link href="/orders/create#summary">
           <Badge className="text-blue bg-[#F2F4F7] px-4 py-2 text-sm font-bold">
-            Total {total} {commonTranslation.cad}
+            Total {formattedTotal} {commonTranslation.cad}
           </Badge>
         </Link>
       </div>

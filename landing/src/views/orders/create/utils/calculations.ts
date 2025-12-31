@@ -97,11 +97,13 @@ export function calculateOrderClient(
 
   let squareFeetCost = 0;
   if (selectedService.sqft_price) {
-    const squareFeet = req.meta.square_feet || 0;
+    const rawSquareFeet = req.meta.square_feet;
+    const parsedSquareFeet = typeof rawSquareFeet === "string" ? Number(rawSquareFeet) : (rawSquareFeet ?? 0);
+    const squareFeet = Number.isFinite(parsedSquareFeet) ? parsedSquareFeet : 0;
 
     if (isOfficeService || isStairwellsService) {
-      const effectiveSquareFeet = Math.max(squareFeet, 1);
-      squareFeetCost = effectiveSquareFeet * selectedService.sqft_price;
+      // 0 sq ft should be treated as 0 cost (no forced minimum).
+      squareFeetCost = squareFeet > 0 ? squareFeet * selectedService.sqft_price : 0;
     } else if (squareFeet > 0) {
       squareFeetCost = squareFeet * selectedService.sqft_price;
     }
@@ -256,10 +258,12 @@ export function calculateOrderClient(
   const standardCleaningItems: Array<{ name: string; quantity: number; unitPrice: number; total: number }> = [];
 
   if (squareFeetCost > 0 || isOfficeService || isStairwellsService) {
-    const squareFeet = req.meta.square_feet || 0;
-    const effectiveSquareFeet = isOfficeService || isStairwellsService ? Math.max(squareFeet, 1) : squareFeet;
+    const rawSquareFeet = req.meta.square_feet;
+    const parsedSquareFeet = typeof rawSquareFeet === "string" ? Number(rawSquareFeet) : (rawSquareFeet ?? 0);
+    const squareFeet = Number.isFinite(parsedSquareFeet) ? parsedSquareFeet : 0;
+    const effectiveSquareFeet = isOfficeService || isStairwellsService ? squareFeet : squareFeet;
 
-    if (effectiveSquareFeet > 0) {
+    if (effectiveSquareFeet > 0 && squareFeetCost > 0) {
       standardCleaningItems.push({
         name: "Square Feet",
         quantity: effectiveSquareFeet,
