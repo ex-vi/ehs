@@ -34,7 +34,7 @@ export default async function WhatIsIncludeFull({ searchParams = {} }: { searchP
             <h2 id="pricing-section-title" className="heading-lg text-foreground">
               {commonTranslation.whatIsIncludeFull.title}
             </h2>
-            <p className="text-muted-foreground text-base">{commonTranslation.whatIsIncludeFull.description}</p>
+            <p className="text-foreground/80 text-base">{commonTranslation.whatIsIncludeFull.description}</p>
           </div>
 
           <div className="grid w-full grid-cols-1 gap-4 lg:max-w-5xl lg:grid-cols-3 lg:gap-6">
@@ -52,31 +52,30 @@ export default async function WhatIsIncludeFull({ searchParams = {} }: { searchP
                     <div className="flex flex-col gap-6">
                       <div className="relative flex h-24 flex-col gap-3">
                         {badge && (
-                          <Badge variant="blue" className="absolute top-1 right-0 w-fit py-[1px] text-xs font-semibold">
+                          <Badge variant="blue" className="absolute top-1 right-0 w-fit py-px text-xs font-semibold">
                             {badge}
                           </Badge>
                         )}
                         <h3 className={cn("text-lg font-semibold", highlighted && "text-primary")}>
                           {currentService.name}
                         </h3>
-                        <p className="text-muted-foreground text-sm">{description}</p>
+                        <p className="text-foreground/80 text-sm">{description}</p>
                       </div>
 
                       <div className="flex items-end gap-0.5">
                         <span className="-mb-0.5 text-4xl font-semibold">
                           {discountedPrice} {commonTranslation.cad}
                         </span>
-                        <span className="text-muted-foreground ml-1 text-xs">{commonTranslation.forOneRoom}</span>
+                        <span className="text-foreground ml-1 text-xs">{commonTranslation.forOneRoom}</span>
                       </div>
 
-                      <Link href={buildUrl(slug)}>
-                        <Button
-                          variant={highlighted ? "blue" : "secondary"}
-                          className={cn(!highlighted && "text-blue", "w-full")}
-                        >
-                          {commonTranslation.bookNow}
-                        </Button>
-                      </Link>
+                      <Button
+                        asChild
+                        variant={highlighted ? "blue" : "secondary"}
+                        className={cn(!highlighted && "text-blue", "w-full")}
+                      >
+                        <Link href={buildUrl(slug)}>{commonTranslation.bookNow}</Link>
+                      </Button>
                     </div>
 
                     <div className="flex flex-col gap-4">

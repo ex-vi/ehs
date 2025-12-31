@@ -7,7 +7,7 @@ export default function ReviewsHeader() {
         <h2 id="pricing-section-title" className="heading-lg text-foreground">
           {commonTranslation.reviews.title}
         </h2>
-        <p className="text-muted-foreground text-base">{commonTranslation.reviews.description}</p>
+        <p className="text-foreground/80 text-base">{commonTranslation.reviews.description}</p>
       </div>
     </div>
   );

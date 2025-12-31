@@ -10,7 +10,7 @@ export default function FaqItemComponent({ faq, index }: FaqItemComponentProps) 
   return (
     <AccordionItem key={index} value={index.toString()}>
       <AccordionTrigger className="text-left text-base font-medium">{faq.question}</AccordionTrigger>
-      <AccordionContent className="text-muted-foreground text-sm">{faq.answer}</AccordionContent>
+      <AccordionContent className="text-foreground/80 text-sm">{faq.answer}</AccordionContent>
     </AccordionItem>
   );
 }

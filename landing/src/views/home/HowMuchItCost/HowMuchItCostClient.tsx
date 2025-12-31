@@ -12,7 +12,7 @@ import { getDiscountPercentageFromCoefficient } from "@/core/utils/getCoefficien
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 type Props = {
   coefficients?: Coefficient[] | null;
@@ -35,10 +35,10 @@ export default function HowMuchItCostClient({ coefficients, standardService }: P
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 
-  const buildUrl = (rooms: number) => {
+  const buildUrl = (rooms: number, frequency: string) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("rooms", String(rooms));
-    params.set("frequency", activeTab);
+    params.set("frequency", frequency);
     return `/orders/create?${params.toString()}`;
   };
 
@@ -48,18 +48,12 @@ export default function HowMuchItCostClient({ coefficients, standardService }: P
         <div className="section-title-gap-lg mx-auto flex max-w-xl flex-col items-center text-center">
           <h2 className="heading-lg">{commonTranslation.howMuchItCost.title}</h2>
 
-          <p className="text-muted-foreground">{commonTranslation.howMuchItCost.description}</p>
+          <p className="text-foreground/80">{commonTranslation.howMuchItCost.description}</p>
         </div>
 
-        <div className="flex w-full justify-center">
-          <Tabs
-            orientation="horizontal"
-            defaultValue={initialFrequency}
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className="w-full md:max-w-[820px]"
-          >
-            <TabsList className="grid h-full w-full grid-cols-1 p-0 shadow-none md:h-14 md:grid-cols-4">
+        <Tabs orientation="horizontal" defaultValue={initialFrequency} value={activeTab} onValueChange={setActiveTab}>
+          <div className="flex w-full justify-center">
+            <TabsList className="grid h-full w-full grid-cols-1 p-0 shadow-none md:h-14 md:max-w-[820px] md:grid-cols-4">
               {commonTranslation.howMuchItCost.tabs.map(({ slug, title }, index) => {
                 const coefficient = coefficients?.find((c) => c.slug === slug);
                 const percent = coefficient ? getDiscountPercentageFromCoefficient(coefficient.coefficient) : 0;
@@ -86,42 +80,44 @@ export default function HowMuchItCostClient({ coefficients, standardService }: P
                 );
               })}
             </TabsList>
-          </Tabs>
-        </div>
+          </div>
 
-        <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
-          {commonTranslation.howMuchItCost.cards.map(({ rooms, title, description }, index) => {
-            const base = standardService?.service_price ?? 0;
-            const additionalRooms = Math.max(0, (rooms ?? 1) - 1);
-            const subtotal = base + additionalRooms * (standardService?.extra_bedroom_price ?? 0);
+          {commonTranslation.howMuchItCost.tabs.map(({ slug }) => (
+            <TabsContent key={slug} value={slug} className="mt-10">
+              <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
+                {commonTranslation.howMuchItCost.cards.map(({ rooms, title, description }, index) => {
+                  const base = standardService?.service_price ?? 0;
+                  const additionalRooms = Math.max(0, (rooms ?? 1) - 1);
+                  const subtotal = base + additionalRooms * (standardService?.extra_bedroom_price ?? 0);
 
-            const discountCoeff = coefficients?.find((c) => c.slug === activeTab)?.coefficient ?? 1;
-            const total = subtotal * discountCoeff;
+                  const discountCoeff = coefficients?.find((c) => c.slug === slug)?.coefficient ?? 1;
+                  const total = subtotal * discountCoeff;
 
-            const display = `${Math.round(total)} ${commonTranslation.cad}`;
+                  const display = `${Math.round(total)} ${commonTranslation.cad}`;
 
-            return (
-              <Card key={index} className="bg-muted overflow-hidden rounded-xl border-0 p-0 shadow-none">
-                <CardContent className="flex flex-col gap-2 py-6">
-                  <h3 className="text-foreground text-xl font-semibold">{title}</h3>
-                  <p className="text-muted-foreground text-sm font-normal">{description}</p>
+                  return (
+                    <Card key={index} className="bg-muted overflow-hidden rounded-xl border-0 p-0 shadow-none">
+                      <CardContent className="flex flex-col gap-2 py-6">
+                        <h3 className="text-foreground text-xl font-semibold">{title}</h3>
+                        <p className="text-foreground/80 text-sm font-normal">{description}</p>
 
-                  <p className="text-muted-foreground text-center text-base font-normal">
-                    {commonTranslation.from}{" "}
-                    <span className="text-foreground -mb-0.5 text-2xl font-bold">{display}</span>
-                  </p>
+                        <p className="text-foreground/80 text-center text-base font-normal">
+                          {commonTranslation.from}{" "}
+                          <span className="text-foreground -mb-0.5 text-2xl font-bold">{display}</span>
+                        </p>
 
-                  {/* ------------- BOOK NOW with all query params ------------- */}
-                  <Link className="w-full" href={buildUrl(rooms ?? 1)}>
-                    <Button className="mt-4 w-full" variant="blue">
-                      {commonTranslation.bookNow}
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+                        {/* ------------- BOOK NOW with all query params ------------- */}
+                        <Button asChild className="mt-4 h-12 w-full" variant="blue">
+                          <Link href={buildUrl(rooms ?? 1, slug)}>{commonTranslation.bookNow}</Link>
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </TabsContent>
+          ))}
+        </Tabs>
       </div>
     </section>
   );

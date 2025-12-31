@@ -22,7 +22,7 @@ export default async function WhyChooseUs() {
       <div className="container-padding-x container mx-auto flex flex-col gap-10 md:gap-12">
         <div className="section-title-gap-lg mx-auto flex max-w-xl flex-col items-center text-center">
           <h2 className="heading-lg text-foreground">{commonTranslation.whyChooseUs.title}</h2>
-          <p className="text-muted-foreground text-base">{commonTranslation.whyChooseUs.description}</p>
+          <p className="text-foreground/80 text-base">{commonTranslation.whyChooseUs.description}</p>
         </div>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-6 lg:grid-cols-4">
           {advantages?.map(({ title, description, icon_slug }, index) => {
@@ -33,7 +33,7 @@ export default async function WhyChooseUs() {
                 </div>
                 <div className="flex flex-col gap-2">
                   <h3 className="text-foreground font-semibold">{title}</h3>
-                  <p className="text-muted-foreground">{description}</p>
+                  <p className="text-foreground/80">{description}</p>
                 </div>
               </div>
             );
