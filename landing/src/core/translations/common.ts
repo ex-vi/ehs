@@ -158,7 +158,7 @@ const translation = {
       { title: "Terms of Service", link: "/terms-of-service" },
       { title: "Cookies Settings", link: "/cookie-policy" },
     ],
-    copyright: (year: string) => `Copyright ${year} © `,
+    copyright: (year: string) => `Copyright ${year} © WM EASY CLEAN AND RENOVATION LTD.`,
   },
   toHomePage: "To Home Page",
 };

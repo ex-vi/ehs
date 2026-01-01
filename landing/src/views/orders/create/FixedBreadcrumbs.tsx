@@ -9,8 +9,6 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator } from 
 
 import "./FixedBreadcrumbs.css";
 
-import Link from "next/link";
-
 import { commonTranslation } from "@/core/translations/common";
 import { Badge } from "@/components/ui/badge";
 
@@ -59,17 +57,23 @@ export default function FixedBreadcrumbs({ total }: { total: number }) {
     if (firstSection) scrollToSection(firstSection);
   };
 
+  const handleScrollToSummary = () => {
+    const el = document.getElementById("summary");
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <div className="sticky top-16 z-40 mb-6 lg:top-19">
       <div className="bg-background flex w-full justify-between pb-3 lg:hidden">
         <div className="section-title-gap-lg">
           <h2 className="heading-lg">{ordersTranslation.yourOrder.title}</h2>
         </div>
-        <Link href="/orders/create#summary">
-          <Badge className="text-blue bg-[#F2F4F7] px-4 py-2 text-sm font-bold">
+        <Badge asChild className="text-blue bg-[#F2F4F7] px-4 py-2 text-sm font-bold">
+          <button type="button" onClick={handleScrollToSummary}>
             Total {formattedTotal} {commonTranslation.cad}
-          </Badge>
-        </Link>
+          </button>
+        </Badge>
       </div>
       <Breadcrumb className="rounded-md">
         <BreadcrumbList
