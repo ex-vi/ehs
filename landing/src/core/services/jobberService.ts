@@ -1,3 +1,4 @@
+import { fetchServices } from "@/core/api/services";
 import { CreateOrderRequest } from "@/core/forms/orders/create";
 
 import jobberClient from "./jobberClient";
@@ -10,6 +11,15 @@ import { CreateJobberOrderResult } from "./jobberTypes";
 export async function createJobberOrder(orderData: CreateOrderRequest): Promise<CreateJobberOrderResult> {
   try {
     const { meta, datetime } = orderData;
+
+    // Fetch service pricing details (extra room/bath/kitchen unit prices come from Strapi)
+    const services = await fetchServices();
+    const selectedService = services.find((s) => s.slug === meta.service.slug);
+    if (!selectedService) {
+      console.warn(
+        `Jobber: Service not found in Strapi for slug '${meta.service.slug}'. Extra line items may be missing.`
+      );
+    }
 
     // Get a valid access token (will refresh if needed)
     const accessToken = await jobberTokenManager.getValidAccessToken();
@@ -37,7 +47,29 @@ export async function createJobberOrder(orderData: CreateOrderRequest): Promise<
       });
     }
 
-    // Step 3: Build line items from service and addons
+    // Step 3: Build line items from service, additional rooms/baths/kitchens, and addons
+    const hasBaseRooms = ["standard", "deep", "move-in", "after-renovation"].includes(meta.service.slug);
+    const isStairwellsService = meta.service.slug === "staircases";
+    const isOfficeService = meta.service.slug === "office";
+    const isWindowsService = meta.service.slug === "windows";
+    const isKitchenService = meta.service.slug === "kitchen";
+    const isRenovationsService = meta.service.slug === "renovations";
+
+    const excludeRoomsCost = isStairwellsService || isOfficeService || isWindowsService || isRenovationsService;
+    const excludeBathroomKitchenCost = isStairwellsService || isWindowsService || isRenovationsService;
+
+    const chargeableRooms = excludeRoomsCost ? 0 : hasBaseRooms ? Math.max(0, meta.extra_rooms - 1) : meta.extra_rooms;
+    const chargeableBathrooms = excludeBathroomKitchenCost
+      ? 0
+      : hasBaseRooms
+        ? Math.max(0, meta.extra_bathrooms - 1)
+        : meta.extra_bathrooms;
+    const chargeableKitchens = excludeBathroomKitchenCost
+      ? 0
+      : hasBaseRooms || isKitchenService
+        ? Math.max(0, meta.extra_kitchens - 1)
+        : meta.extra_kitchens;
+
     const lineItems = [
       {
         name: meta.service.name,
@@ -45,6 +77,36 @@ export async function createJobberOrder(orderData: CreateOrderRequest): Promise<
         unitCost: meta.service.price,
         quantity: 1,
       },
+      ...(chargeableRooms > 0
+        ? [
+            {
+              name: "Extra Rooms",
+              description: "",
+              unitCost: selectedService?.extra_bedroom_price ?? 0,
+              quantity: chargeableRooms,
+            },
+          ]
+        : []),
+      ...(chargeableBathrooms > 0
+        ? [
+            {
+              name: "Extra Bathrooms",
+              description: "",
+              unitCost: selectedService?.extra_bathroom_price ?? 0,
+              quantity: chargeableBathrooms,
+            },
+          ]
+        : []),
+      ...(chargeableKitchens > 0
+        ? [
+            {
+              name: "Extra Kitchens",
+              description: "",
+              unitCost: selectedService?.extra_kitchen_price ?? 0,
+              quantity: chargeableKitchens,
+            },
+          ]
+        : []),
       ...meta.addons.map((addon) => ({
         name: addon.name,
         description: "",

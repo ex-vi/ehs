@@ -243,9 +243,6 @@ class JobberClient {
       };
     }
   ): Promise<string> {
-    // Combine street1 and street2 into a single street field
-    const street = input.address.street2 ? `${input.address.street1}, ${input.address.street2}` : input.address.street1;
-
     const mutation = `
       mutation PropertyCreate($clientId: EncodedId!, $input: PropertyCreateInput!) {
         propertyCreate(clientId: $clientId, input: $input) {
@@ -278,11 +275,11 @@ class JobberClient {
       input: {
         properties: [
           {
-            name: "Client's Property",
+            //name: "Client's Property",
             address: {
-              street1: street,
-              street2: street,
-              city: input.address.city,
+              street1: input.address.street1,
+              street2: input.address.street2 ?? "",
+              city: capitalize(input.address.city),
               country: "Canada",
               province: input.address.province,
               postalCode: input.address.postalCode,
@@ -302,6 +299,10 @@ class JobberClient {
 
     return result.propertyCreate.properties[0].id;
   }
+}
+
+function capitalize(val: string) {
+  return val.charAt(0).toUpperCase() + val.slice(1);
 }
 
 const jobberClient = new JobberClient();
