@@ -1049,13 +1049,13 @@ export default function OrderForm({ services, addons, coefficients, tax, formik 
           onValueChange={(value) => setFieldValue("payment_method", value)}
           className="w-full"
         >
-          <TabsList className="grid h-full w-full grid-cols-1 p-0.5 shadow-none md:grid-cols-4">
+          <TabsList className="grid h-auto w-full grid-cols-1 place-items-stretch p-0.5 shadow-none md:grid-cols-4">
             {paymentsTabs.map(({ label, iconHref }, index) => (
               <TabsTrigger
                 key={index}
                 value={label}
                 className={cn(
-                  "data-[state=active]:text-primary-foreground data-[state=active]:bg-blue flex flex-col p-6 text-sm font-medium transition-all md:h-full"
+                  "data-[state=active]:text-primary-foreground data-[state=active]:bg-blue flex w-full flex-col self-stretch p-6 text-sm font-medium whitespace-normal transition-all"
                 )}
               >
                 <Image src={iconHref} alt={label} width={48} height={48} className="md:h-16 md:w-16" />

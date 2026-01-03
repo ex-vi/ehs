@@ -1,7 +1,7 @@
 "use client";
 
 import { CheckSquare } from "lucide-react";
-import { useEffect } from "react";
+import { useLayoutEffect, useRef } from "react";
 import Link from "next/link";
 
 import { commonTranslation } from "@/core/translations/common";
@@ -10,12 +10,24 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 export default function BookingConfirmed() {
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const topRef = useRef<HTMLDivElement | null>(null);
+
+  useLayoutEffect(() => {
+    const scrollToTop = () => {
+      topRef.current?.scrollIntoView({ block: "start" });
+
+      const scrollingElement = document.scrollingElement ?? document.documentElement;
+      scrollingElement.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    };
+
+    scrollToTop();
+    requestAnimationFrame(scrollToTop);
+    setTimeout(scrollToTop, 50);
   }, []);
 
   return (
-    <div className="bg-background flex min-h-screen items-center justify-center">
+    <div ref={topRef} className="bg-background flex min-h-screen items-center justify-center">
       <div className="w-full max-w-md space-y-4">
         <Card className="rounded-md border-none bg-[#F2F4F7] shadow-none">
           <CardContent className="flex flex-col items-center justify-center space-y-2 py-8 text-center">
