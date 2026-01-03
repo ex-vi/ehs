@@ -204,13 +204,13 @@ export default function OrderForm({ services, addons, coefficients, tax, formik 
       setFieldValue("bathrooms", 0);
       setFieldValue("kitchens", 0);
       setFieldValue("windows", 0);
-      setFieldValue("square_feet", "1");
+      setFieldValue("square_feet", "0");
     } else if (values.service_type === "staircases") {
       setFieldValue("rooms", 0);
       setFieldValue("bathrooms", 0);
       setFieldValue("kitchens", 0);
       setFieldValue("windows", 0);
-      setFieldValue("square_feet", "1");
+      setFieldValue("square_feet", "0");
     } else if (values.service_type === "renovations") {
       setFieldValue("rooms", 0);
       setFieldValue("bathrooms", 0);

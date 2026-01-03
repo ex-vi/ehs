@@ -181,7 +181,7 @@ const createInitialValues = (searchParams: Record<string, string>): CreateOrderF
     bathrooms: parseInt(searchParams.bathrooms || (isKitchen ? "0" : "1"), 10),
     kitchens: parseInt(searchParams.kitchens || (isKitchen ? "1" : "1"), 10),
     windows: parseInt(searchParams.windows || (isKitchen ? "0" : "5"), 10),
-    square_feet: searchParams.square_feet || "1",
+    square_feet: searchParams.square_feet || "0",
     building_type: (searchParams.building_type as "Apartment" | "House") || "Apartment",
     selected_date:
       searchParams.date ||
