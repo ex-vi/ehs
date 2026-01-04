@@ -302,7 +302,7 @@ export function RenovationServices({ services = [], onChange }: RenovationServic
   }, [values]);
 
   const toggleService = (slug: string) => {
-    const isActive = values[slug] !== undefined && values[slug] !== "0";
+    const isActive = values[slug] !== undefined;
     if (isActive) {
       // Если активна - полностью деактивируем (убираем из состояния)
       setValues((prev) => {
@@ -311,10 +311,10 @@ export function RenovationServices({ services = [], onChange }: RenovationServic
         return newValues;
       });
     } else {
-      // Если не активна - активируем с пустым полем для ввода
+      // Если не активна - активируем с 0 (избегаем принудительного min=1 поведения)
       setValues((prev) => ({
         ...prev,
-        [slug]: "",
+        [slug]: "0",
       }));
     }
   };
@@ -329,7 +329,7 @@ export function RenovationServices({ services = [], onChange }: RenovationServic
         {RENOVATION_SERVICES_ORDER.map((slug) => services.find((service) => service.slug === slug))
           .filter((service) => service !== undefined)
           .map((service) => {
-            const isActive = values[service.slug] !== undefined && values[service.slug] !== "0";
+            const isActive = values[service.slug] !== undefined;
 
             return (
               <div
@@ -353,7 +353,7 @@ export function RenovationServices({ services = [], onChange }: RenovationServic
                             placeholder="0"
                             value={values[service.slug] || ""}
                             onChange={(e) => updateValue(service.slug, e.target.value)}
-                            min="1"
+                            min="0"
                           />
                           <span className="text-muted-foreground absolute top-1/2 right-2 -translate-y-1/2 text-xs">
                             sq ft
@@ -417,7 +417,7 @@ export function RenovationServices({ services = [], onChange }: RenovationServic
 
                 <div>
                   <p className="text-sm font-medium">{service.name}</p>
-                  <p className="text-muted-foreground mt-1 text-xs">${service.sqft_price}/sqft</p>
+                  <p className="mt-1 text-xs">from {service.sqft_price} CAD / sqft</p>
                 </div>
               </div>
 

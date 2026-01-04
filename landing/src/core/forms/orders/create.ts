@@ -174,14 +174,24 @@ const validationSchema = Yup.object({
 const createInitialValues = (searchParams: Record<string, string>): CreateOrderFormValues => {
   const service_type = searchParams.service || searchParams.service_type || "standard";
   const isKitchen = service_type === "kitchen";
+  const isWindows = service_type === "windows";
+  const isOffice = service_type === "office";
+  const isStaircases = service_type === "staircases";
+  const isRenovations = service_type === "renovations";
+
+  const defaultRooms = isKitchen || isWindows || isOffice || isStaircases || isRenovations ? "0" : "1";
+  const defaultBathrooms = isKitchen || isWindows || isOffice || isStaircases || isRenovations ? "0" : "1";
+  const defaultKitchens = isKitchen ? "1" : isWindows || isOffice || isStaircases || isRenovations ? "0" : "1";
+  const defaultWindows = isWindows ? "5" : "0";
+  const defaultSquareFeet = isOffice || isStaircases || isRenovations ? "0" : "";
 
   return {
     service_type,
-    rooms: parseInt(searchParams.rooms || (isKitchen ? "0" : "1"), 10),
-    bathrooms: parseInt(searchParams.bathrooms || (isKitchen ? "0" : "1"), 10),
-    kitchens: parseInt(searchParams.kitchens || (isKitchen ? "1" : "1"), 10),
-    windows: parseInt(searchParams.windows || (isKitchen ? "0" : "5"), 10),
-    square_feet: searchParams.square_feet || "0",
+    rooms: parseInt(searchParams.rooms || defaultRooms, 10),
+    bathrooms: parseInt(searchParams.bathrooms || defaultBathrooms, 10),
+    kitchens: parseInt(searchParams.kitchens || defaultKitchens, 10),
+    windows: parseInt(searchParams.windows || defaultWindows, 10),
+    square_feet: searchParams.square_feet ?? defaultSquareFeet,
     building_type: (searchParams.building_type as "Apartment" | "House") || "Apartment",
     selected_date:
       searchParams.date ||

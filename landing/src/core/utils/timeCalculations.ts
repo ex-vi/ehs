@@ -10,8 +10,14 @@ export function calculateWorkerTime(formData: OrderFormData, services: Service[]
   if (selectedService) {
     const hasBaseRooms = SERVICES_WITH_BASE_ROOMS.includes(selectedService.slug as any);
     const isKitchenService = selectedService.slug === "kitchen";
+    const isWindowsService = selectedService.slug === "windows";
 
-    totalMinutes += selectedService.worker_time;
+    if (isWindowsService) {
+      const windowsCount = typeof formData.windows === "number" ? Math.max(0, formData.windows) : 0;
+      totalMinutes += selectedService.worker_time * windowsCount;
+    } else {
+      totalMinutes += selectedService.worker_time;
+    }
 
     const extraRooms = hasBaseRooms ? Math.max(0, formData.rooms - 1) : formData.rooms;
     const extraBathrooms = hasBaseRooms ? Math.max(0, formData.bathrooms - 1) : formData.bathrooms;
@@ -47,8 +53,14 @@ export function calculateClientTime(formData: OrderFormData, services: Service[]
   if (selectedService) {
     const hasBaseRooms = SERVICES_WITH_BASE_ROOMS.includes(selectedService.slug as any);
     const isKitchenService = selectedService.slug === "kitchen";
+    const isWindowsService = selectedService.slug === "windows";
 
-    totalMinutes += selectedService.client_time;
+    if (isWindowsService) {
+      const windowsCount = typeof formData.windows === "number" ? Math.max(0, formData.windows) : 0;
+      totalMinutes += selectedService.client_time * windowsCount;
+    } else {
+      totalMinutes += selectedService.client_time;
+    }
 
     const extraRooms = hasBaseRooms ? Math.max(0, formData.rooms - 1) : formData.rooms;
     const extraBathrooms = hasBaseRooms ? Math.max(0, formData.bathrooms - 1) : formData.bathrooms;

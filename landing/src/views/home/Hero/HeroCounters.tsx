@@ -34,7 +34,7 @@ export function HeroCounters() {
         size="sm"
       />
 
-      <Link href={`/orders/create?rooms=${rooms}&bathrooms=${bathrooms}`}>
+      <Link href={`/orders/create?service=standard&rooms=${rooms}&bathrooms=${bathrooms}`}>
         <Button className="bg-blue h-10 w-full gap-2 rounded-md px-8! transition-all hover:bg-[#006CCC] md:h-full">
           <span>{commonTranslation.hero.counter.seePrice}</span>
           <ArrowRight className="iconSize" />

@@ -38,7 +38,7 @@ export function transformOrderData(
       extra_rooms: formData.rooms,
       extra_bathrooms: formData.bathrooms,
       extra_kitchens: formData.kitchens,
-      windows: formData.windows || 5,
+      windows: formData.windows ?? 5,
       reconfirm: formData.reconfirm,
       cadence: formData.frequency,
       addons: Object.entries(formData.selected_services)
