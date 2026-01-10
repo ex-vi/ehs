@@ -21,7 +21,7 @@ export function transformOrderData(
     return new Date(`${date}T${time}:00.000Z`).toISOString();
   };
 
-  const timeCalculations = calculateBothTimes(formData, services, addons);
+  const timeCalculations = calculateBothTimes(formData, services, addons, coefficients);
 
   const selectedService = services.find((s) => s.slug === formData.service_type);
 

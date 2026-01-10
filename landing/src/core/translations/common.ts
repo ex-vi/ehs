@@ -1,7 +1,7 @@
 type Translation = typeof translation;
 
 const translation = {
-  site: "Easy Home Services",
+  site: "Donely Home Services",
   from: "From",
   termsLink: "terms-of-service",
   login: "Login",
@@ -89,7 +89,7 @@ const translation = {
   whatIsIncludeFull: {
     title: "What’s Included in a Full Home Cleaning?",
     description:
-      "Professional cleaning in Halifax with Easy Home Services is a complete approach to keeping your home fresh and spotless. We cover everything needed so your space shines with cleanliness. Our services include:",
+      "Professional cleaning in Halifax with Donely Home Services is a complete approach to keeping your home fresh and spotless. We cover everything needed so your space shines with cleanliness. Our services include:",
     prices: [
       {
         slug: "standard",

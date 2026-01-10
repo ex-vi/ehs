@@ -1,5 +1,5 @@
 export const BASE_TIMEOUT = 10000;
-export const PUBLIC_URL = "https://easyhs.ca";
+export const PUBLIC_URL = "https://donely.ca";
 
 export const API_BASE_URL = process.env.API_BASE_URL;
 export const AUTH_API_KEY = process.env.AUTH_API_KEY;

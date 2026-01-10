@@ -1,5 +1,6 @@
 import { SERVICES_WITH_BASE_ROOMS } from "@/core/constants/common";
 import type { Addon } from "@/core/models/addons";
+import type { Coefficient } from "@/core/models/coefficients";
 import type { OrderFormData } from "@/core/models/orders";
 import type { Service } from "@/core/models/services";
 
@@ -92,13 +93,26 @@ export function calculateClientTime(formData: OrderFormData, services: Service[]
 export function calculateBothTimes(
   formData: OrderFormData,
   services: Service[],
-  addons: Addon[]
+  addons: Addon[],
+  coefficients: Coefficient[]
 ): {
   workerTime: number;
   clientTime: number;
 } {
+  let workerTime = calculateWorkerTime(formData, services, addons);
+  let clientTime = calculateClientTime(formData, services, addons);
+
+  // Apply coefficient for house/apartment to time
+  const propertyType = formData.building_type?.toLowerCase();
+  if (propertyType === "house") {
+    const houseCoeff = coefficients?.find((c) => c.slug === "house");
+    if (houseCoeff && houseCoeff.coefficient !== 1) {
+      workerTime *= houseCoeff.coefficient;
+      clientTime *= houseCoeff.coefficient;
+    }
+  }
   return {
-    workerTime: calculateWorkerTime(formData, services, addons),
-    clientTime: calculateClientTime(formData, services, addons),
+    workerTime,
+    clientTime,
   };
 }
