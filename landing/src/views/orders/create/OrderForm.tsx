@@ -570,7 +570,7 @@ export default function OrderForm({ services, addons, coefficients, tax, formik 
                 />
               </div>
             ) : values.service_type === "windows" ? (
-              <div className="mb-6 grid grid-cols-1 gap-2 border-b pb-6 md:grid-cols-3 md:gap-4">
+              <div className="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-4">
                 <Counter
                   label="Windows"
                   value={values.windows}
@@ -639,7 +639,7 @@ export default function OrderForm({ services, addons, coefficients, tax, formik 
               </div>
             ) : null}
 
-            {currentServiceType !== "business" && !isExBusiness && (
+            {currentServiceType !== "business" && values.service_type !== "windows" && !isExBusiness && (
               <Tabs
                 value={values.building_type}
                 onValueChange={(value) => setFieldValue("building_type", value)}
@@ -956,8 +956,22 @@ export default function OrderForm({ services, addons, coefficients, tax, formik 
             }
           />
 
+          <FormBlock
+            label={ordersTranslation.yourOrder.addressAndContacts.fields[6].label}
+            field={
+              <Textarea
+                name="address.parking_instructions"
+                value={values.address.parking_instructions}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                placeholder={ordersTranslation.yourOrder.addressAndContacts.fields[6].placeholder}
+                rows={3}
+              />
+            }
+          />
+
           <div className="text-foreground text-sm">
-            {ordersTranslation.yourOrder.addressAndContacts.fields[6].label}
+            {ordersTranslation.yourOrder.addressAndContacts.fields[7].label}
           </div>
         </CardContent>
       </Card>
@@ -1200,7 +1214,7 @@ export default function OrderForm({ services, addons, coefficients, tax, formik 
             </Label>
           </div>
 
-          <div className="flex items-center space-x-2">
+          {/* <div className="flex items-center space-x-2">
             <Checkbox
               name="agreements.create_profile"
               id="create_profile"
@@ -1210,7 +1224,7 @@ export default function OrderForm({ services, addons, coefficients, tax, formik 
             <Label htmlFor="create_profile" className="text-foreground text-sm leading-relaxed">
               {ordersTranslation.yourOrder.paymentMethod.createProfile}
             </Label>
-          </div>
+          </div> */}
         </div>
 
         <Button

@@ -84,6 +84,7 @@ export type CreateOrderFormValues = {
     city: string;
     province: string;
     entry_instructions: string;
+    parking_instructions: string;
     zip_code: string;
   };
   contact: {
@@ -218,6 +219,7 @@ const createInitialValues = (searchParams: Record<string, string>): CreateOrderF
       city: searchParams.city || "",
       province: searchParams.province || "",
       entry_instructions: searchParams.entry_instructions || "",
+      parking_instructions: searchParams.parking_instructions || "",
       zip_code: searchParams.zip_code || "",
     },
     contact: {
@@ -239,7 +241,7 @@ const createInitialValues = (searchParams: Record<string, string>): CreateOrderF
     agreements: {
       terms: false,
       consent: false,
-      create_profile: false,
+      create_profile: true,
     },
     // TEMPORARY: Renovation services support - can be easily removed
     renovation_services: {},

@@ -21,7 +21,7 @@ type CleaningCardProps = {
 const Hero = ({ src, alt = "Cleaning service" }: { src?: string; alt?: string }) => {
   if (!src) {
     return (
-      <div className="flex aspect-[4/3] w-full items-center justify-center">
+      <div className="flex aspect-4/3 w-full items-center justify-center">
         <div className="text-4xl text-gray-400">🏠</div>
       </div>
     );
@@ -53,16 +53,44 @@ const SectionList = ({
   </div>
 );
 
+const ElementList = ({
+  title,
+  elements,
+  titleClassName = "text-sm font-medium",
+}: {
+  title: string;
+  elements: readonly { title: string; includes: string[] }[];
+  titleClassName?: string;
+}) => (
+  <div className={cn("mb-4")}>
+    <h4 className={cn("mb-2 leading-6", titleClassName)}>{title}</h4>
+    <ul className="list-disc text-sm leading-5">
+      {elements.map((item, index) => (
+        <div key={index} className="mb-3">
+          <h5 key={index} className="my-2 font-semibold">
+            {item.title}
+          </h5>
+          {item.includes.map((subItem, subIndex) => (
+            <li className="ml-7" key={subIndex}>
+              {subItem}
+            </li>
+          ))}
+        </div>
+      ))}
+    </ul>
+  </div>
+);
+
 const InfoPill = ({ children }: { children: React.ReactNode }) => (
   <div className="border-esg-blue bg-background flex items-center gap-2 rounded-lg border px-3 py-2 text-sm leading-5">
-    <Info className="text-esg-blue h-4 w-4 flex-shrink-0" />
+    <Info className="text-esg-blue h-4 w-4 shrink-0" />
     <p className="text-esg-blue">{children}</p>
   </div>
 );
 
 const WarningPill = ({ children }: { children: React.ReactNode }) => (
   <div className="bg-background flex items-center gap-2 rounded-lg border border-amber-600 px-3 py-2 text-sm leading-5">
-    <AlertTriangle className="h-4 w-4 flex-shrink-0 text-amber-600" />
+    <AlertTriangle className="h-4 w-4 shrink-0 text-amber-600" />
     <p className="text-amber-600">{children}</p>
   </div>
 );
@@ -70,8 +98,8 @@ const WarningPill = ({ children }: { children: React.ReactNode }) => (
 const ExamplesGrid = ({ examples }: { examples: HowWeCountExample[] }) => (
   <div className="mb-4 grid grid-cols-2 gap-3">
     {examples.map((example, index) => (
-      <Card key={index} className="rounded-[4px] p-2">
-        <div className="mb-2 aspect-[4/3] overflow-hidden">
+      <Card key={index} className="rounded-lg p-2">
+        <div className="mb-2 aspect-4/3 overflow-hidden">
           {example.image ? (
             <Image
               src={example.image}
@@ -130,12 +158,16 @@ export function CleaningCard({ variant, defaultOpen = false, className }: Cleani
         )} */}
 
         {/* {(variant === "deep" || variant === "after-renovation" || variant === "kitchen") && data.sections?.includes && ( */}
-        {(variant === "deep" || variant === "kitchen") && data.sections?.includes && (
+        {variant === "deep" && data.sections?.includes && (
           <SectionList
             titleClassName="font-semibold text-lg"
             title="What's included:"
             items={data.sections.includes as string[]}
           />
+        )}
+
+        {variant === "kitchen" && data.elements && (
+          <ElementList titleClassName="font-semibold text-lg" title="What's included:" elements={data.elements} />
         )}
 
         {/* {variant === "office" && data.sections && (
@@ -195,6 +227,12 @@ export function CleaningCard({ variant, defaultOpen = false, className }: Cleani
             {data.sections.kitchenBath && (
               <div className="mb-4">
                 <SectionList title={data.sections.kitchenBath.title} items={data.sections.kitchenBath.items} />
+              </div>
+            )}
+
+            {data.sections.bathroom && (
+              <div className="mb-4">
+                <SectionList title={data.sections.bathroom.title} items={data.sections.bathroom.items} />
               </div>
             )}
           </>

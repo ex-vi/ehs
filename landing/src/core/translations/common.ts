@@ -10,6 +10,7 @@ const translation = {
   bookNow: "Book Now",
   date: "Date",
   cad: "CAD",
+  or: "or",
   cleaningAndRenovations: "Cleaning & Renovations",
   navigation: [
     { title: "Order Cleaning", link: "/#" },
@@ -28,7 +29,8 @@ const translation = {
       rooms: "Rooms",
       bathroom: "Bathroom",
       kitchen: "Kitchen",
-      seePrice: "See Price",
+      seePrice: "Cleaning Prices",
+      seeRenovations: "Renovation Prices",
     },
   },
   howMuchItCost: {
@@ -57,17 +59,20 @@ const translation = {
       {
         rooms: 1,
         title: "1-bedroom",
-        description: "Includes cleaning of one bedroom, kitchen, entryway, and one bathroom — once per week.",
+        description: (frequency: string) =>
+          `Includes cleaning of one bedroom, kitchen, entryway, and one bathroom — ${frequency}.`,
       },
       {
         rooms: 2,
         title: "2-bedroom",
-        description: "Includes cleaning of one bedroom, kitchen, entryway, and one bathroom — once per week.",
+        description: (frequency: string) =>
+          `Includes cleaning of two bedrooms, kitchen, entryway, and one bathroom — ${frequency}.`,
       },
       {
         rooms: 3,
         title: "3-bedroom",
-        description: "Includes cleaning of one bedroom, kitchen, entryway, and one bathroom — once per week.",
+        description: (frequency: string) =>
+          `Includes cleaning of three bedrooms, kitchen, entryway, and one bathroom — ${frequency}.`,
       },
     ],
   },
@@ -96,7 +101,7 @@ const translation = {
         description:
           "Full cleaning of your bedroom, kitchen, entryway, and bathroom — everything you need in one visit.",
         included: [
-          "Organizing clothes, shoes, and general items",
+          "Picking up and neatly arranging clothes, shoes, and personal items",
           "Dusting all open and reachable surfaces",
           "Vacuuming carpets, mopping all floors and baseboards",
           "Cleaning bathroom fixtures and disinfecting surfaces",

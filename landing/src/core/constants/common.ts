@@ -12,6 +12,8 @@ export const JOBBER_CLIENT_SECRET = process.env.JOBBER_CLIENT_SECRET;
 
 export const STRAPI_REVALIDATION_SECONDS = process.env.NODE_ENV === "production" ? 1800 : 0;
 
+export const GOOGLE_MAPS_API_KEY = "AIzaSyCX0wQIz-PYLHbUqQjBUz7w2XavcDT49VU";
+
 export const INDIVIDUAL_SERVICE_ORDER = [
   "standard",
   "deep",

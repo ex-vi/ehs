@@ -1,3 +1,5 @@
+import { pl } from "date-fns/locale";
+
 type Translation = typeof translation;
 
 const translation = {
@@ -43,7 +45,12 @@ const translation = {
         { label: "City" },
         { label: "Province" },
         { label: "ZIP Code" },
-        { label: "Entry instructions", placeholder: "Buzz code, gate code, parking info, “back door,” etc." },
+        { label: "Entry instructions", placeholder: "Buzz code, gate code, “back door,” etc." },
+        {
+          label: "Parking instructions",
+          placeholder:
+            "Availability of parking, exact parking location, access instructions, parking restrictions, paid parking, etc.",
+        },
         { label: "Landmarks / notes for finding the place. Pet information." },
       ],
     },

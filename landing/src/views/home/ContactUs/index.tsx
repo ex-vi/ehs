@@ -17,6 +17,8 @@ export async function fetchContacts(): Promise<Contact[]> {
 
 export default async function ContactUs() {
   const contacts = await fetchContacts();
+  const socials = contacts.filter((contact) => contact.slug !== "phone" && contact.slug !== "email");
+  const email = contacts.find((contact) => contact.slug === "email");
 
   return (
     <section id="contacts" className="bg-background section-padding-y scroll-mt-14" aria-labelledby="contact-heading">
@@ -30,11 +32,20 @@ export default async function ContactUs() {
               <p className="text-muted-foreground">{commonTranslation.contact.description}</p>
             </div>
             <div className="flex flex-row gap-5">
-              {contacts?.map(({ link, title, slug }, index) => (
+              {socials.map(({ link, title, slug }, index) => (
                 <Link key={index} href={link} className="text-foreground transition-all duration-300 hover:scale-110">
                   <Image src={`/${slug}.svg`} alt={title} width={40} height={40} />
                 </Link>
               ))}
+              {email && commonTranslation.or}
+              {email && (
+                <Link
+                  href={email?.link || ""}
+                  className="text-foreground hover:text-primary underline underline-offset-4"
+                >
+                  {email?.title}
+                </Link>
+              )}
             </div>
           </div>
         </div>

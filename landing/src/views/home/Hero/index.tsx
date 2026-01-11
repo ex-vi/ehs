@@ -22,7 +22,7 @@ export default async function Hero() {
       )}
 
       <div className="container-padding-x relative z-10 container mx-auto flex h-full w-full flex-col items-center justify-center">
-        <div className="mx-auto flex flex-1 flex-col items-center justify-center text-center">
+        <div className="mx-auto flex flex-1 flex-col items-center justify-center gap-4 text-center">
           <HeroContent />
           <HeroCounters />
         </div>

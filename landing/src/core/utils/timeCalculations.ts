@@ -111,8 +111,9 @@ export function calculateBothTimes(
       clientTime *= houseCoeff.coefficient;
     }
   }
+
   return {
-    workerTime,
-    clientTime,
+    workerTime: Math.round(workerTime * 10) / 10,
+    clientTime: Math.round(clientTime * 10) / 10,
   };
 }

@@ -95,11 +95,15 @@ export default function HowMuchItCostClient({ coefficients, standardService }: P
 
                   const display = `${Math.round(total)} ${commonTranslation.cad}`;
 
+                  // Find the tab title for the current slug to use as frequency label
+                  const tab = commonTranslation.howMuchItCost.tabs.find((t) => t.slug === slug);
+                  const frequencyLabel = tab ? tab.title.toLowerCase() : "";
+
                   return (
                     <Card key={index} className="bg-muted overflow-hidden rounded-xl border-0 p-0 shadow-none">
                       <CardContent className="flex flex-col gap-2 py-6">
                         <h3 className="text-foreground text-xl font-semibold">{title}</h3>
-                        <p className="text-foreground/80 text-sm font-normal">{description}</p>
+                        <p className="text-foreground/80 text-sm font-normal">{description(frequencyLabel)}</p>
 
                         <p className="text-foreground/80 text-center text-base font-normal">
                           {commonTranslation.from}{" "}

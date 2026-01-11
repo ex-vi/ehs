@@ -668,7 +668,9 @@ export interface ApiContactContact extends Struct.CollectionTypeSchema {
       'api::contact.contact'
     >;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.Enumeration<['telegram', 'messenger', 'whatsapp']> &
+    slug: Schema.Attribute.Enumeration<
+      ['telegram', 'messenger', 'whatsapp', 'phone', 'email']
+    > &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {

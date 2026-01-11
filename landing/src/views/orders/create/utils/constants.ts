@@ -1,3 +1,5 @@
+import { title } from "process";
+
 export type CleaningVariant =
   | "standard"
   | "deep"
@@ -42,6 +44,10 @@ export interface CleaningCardData {
   gallery?: string[];
   whatsIncluded?: string[];
   sections?: Record<string, any>;
+  elements?: {
+    title: string;
+    includes: string[];
+  }[];
   howWeCount?: HowWeCount;
   notes?: string[];
   addOns?: string[];
@@ -154,6 +160,19 @@ const cleaningCards: CleaningCardsMap = {
           "Cleaning the dishwasher inside and out",
         ],
       },
+      bathroom: {
+        title: "Bathroom:",
+        items: [
+          "Scrubbing and disinfecting all bathroom surfaces",
+          "Cleaning and disinfecting the toilet",
+          "Cleaning the bathtub, shower cabin, and faucets",
+          "Washing the sink",
+          "Cleaning mirrors",
+          "Washing floors and baseboards",
+          "Dusting / wiping walls and light fixtures",
+          "Cleaning interior bathroom doors and door frames",
+        ],
+      },
     },
   },
 
@@ -249,20 +268,59 @@ const cleaningCards: CleaningCardsMap = {
     key: "kitchen",
     title: "Kitchen Cleaning",
     tagline:
-      "A full-scope deep clean of your entire kitchen — inside, outside, top to bottom. This service takes 5–6 hours and leaves no corner untouched.",
+      "A full-scope deep clean of your entire kitchen — inside, outside, top to bottom. This service takes 4–5 hours and leaves no corner untouched.",
     icon: "",
     hero: "/services/kitchen-cabinets.svg",
     gallery: [],
-    sections: {
-      includes: [
-        "Organization of items inside kitchen cabinets",
-        "Cleaning of work surfaces, kitchen fronts, outer surfaces of appliances, ceramic tiles, countertops, and windowsills",
-        "Cleaning inside the refrigerator, oven and stove, kitchen cabinets, hood, microwave, and dishwasher",
-        "Washing the floor, baseboards, doors, and windowsills",
-        "Disinfection of all work surfaces",
-        "Taking out the trash, replacing garbage bags, washing a small amount of dishes",
-      ],
-    },
+    elements: [
+      {
+        title: "1. Kitchen Cabinets & Storage",
+        includes: [
+          "Cleaning cabinets inside and outside",
+          "Wiping shelves",
+          "Organizing items inside cabinets (without disposal unless agreed in advance)",
+        ],
+      },
+      {
+        title: "2. Appliances",
+        includes: [
+          "Cleaning cabinets inside and outside",
+          "Wiping shelves",
+          "Organizing items inside cabinets (without disposal unless agreed in advance)",
+        ],
+      },
+      {
+        title: "3. Work Areas",
+        includes: [
+          "Refrigerator — inside and outside",
+          "Oven / stove — inside and outside",
+          "Microwave — inside and outside",
+          "Dishwasher — inside and outside",
+          "Range hood and filters",
+          "Exterior surfaces of all appliances",
+        ],
+      },
+      {
+        title: "4. Sink Area",
+        includes: ["Sink", "Faucet (taps)", "Removal of limescale and grease"],
+      },
+      {
+        title: "5. Floor & Lower Areas",
+        includes: ["Floor cleaning", "Baseboards", "Corners and hard-to-reach areas"],
+      },
+      {
+        title: "6. Doors & Other Surfaces",
+        includes: ["Doors", "Handles", "Light switches"],
+      },
+      {
+        title: "7. Sanitation",
+        includes: ["Disinfection of all work surfaces"],
+      },
+      {
+        title: "8. Final Tasks",
+        includes: ["Taking out the trash", "Replacing garbage bags", "Washing a small amount of dishes"],
+      },
+    ],
     addOns: ["Window and balcony cleaning available as add-ons."],
   },
 
@@ -286,7 +344,7 @@ const cleaningCards: CleaningCardsMap = {
     key: "office",
     title: "Office Cleaning",
     tagline:
-      "We provide both regular and deep office cleanings — tailored to your space and schedule. You can book a one-time service or set up a recurring plan.",
+      "Regular office cleaning tailored to your needs and schedule. One-time service or ongoing maintenance is available. To place an order, please specify the total area of the premises, the number of restrooms, and kitchens.",
     icon: "",
     hero: "/services/offices.svg",
     gallery: [],

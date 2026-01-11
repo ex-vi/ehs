@@ -2,13 +2,12 @@
 
 import { useMemo, useState } from "react";
 
+import { cn } from "@/core/lib/utils";
 import { ordersTranslation } from "@/core/translations/orders";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 
 import "./calendar.css";
-
-import { cn } from "@/core/lib/utils";
 
 const makeLocalToday = () => {
   const d = new Date();
@@ -24,9 +23,9 @@ export default function CalendarInDetails({ hideTimeSlots }: { hideTimeSlots?: b
   const [selectedTime, setSelectedTime] = useState<string | null>("10:00");
 
   const timeSlots = useMemo(() => {
-    return Array.from({ length: 48 }, (_, i) => {
+    return Array.from({ length: 45 }, (_, i) => {
       const total = i * 15;
-      const hour = Math.floor(total / 60) + 9;
+      const hour = Math.floor(total / 60) + 7;
       const min = total % 60;
       if (hour > 21) return null;
       return `${String(hour).padStart(2, "0")}:${String(min).padStart(2, "0")}`;

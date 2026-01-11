@@ -417,7 +417,9 @@ export function RenovationServices({ services = [], onChange }: RenovationServic
 
                 <div>
                   <p className="text-sm font-medium">{service.name}</p>
-                  <p className="mt-1 text-xs">from {service.sqft_price} CAD / sqft</p>
+                  <p className="mt-1 text-xs">
+                    from {service.sqft_price} CAD / {service.slug === "baseboard-installation" ? "lin ft" : "sq ft"}
+                  </p>
                 </div>
               </div>
 
@@ -429,7 +431,9 @@ export function RenovationServices({ services = [], onChange }: RenovationServic
                   value={values[service.slug] || ""}
                   onChange={(e) => updateValue(service.slug, e.target.value)}
                 />
-                <p className="absolute top-2 right-2 text-sm">sq ft</p>
+                <p className="absolute top-2 right-2 text-sm">
+                  {service.slug === "baseboard-installation" ? "lin ft" : "sq ft"}
+                </p>
               </div>
             </Card>
           ))}

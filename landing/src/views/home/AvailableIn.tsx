@@ -1,4 +1,5 @@
 import { commonTranslation } from "@/core/translations/common";
+import ServiceMap from "@/components/ServiceMap";
 
 export default async function AvailableIn() {
   return (
@@ -12,11 +13,11 @@ export default async function AvailableIn() {
             <p className="text-muted-foreground text-base">{commonTranslation.availableIn.description}</p>
           </div>
         </div>
-        <div className="w-full flex-1">
+        {/* <div className="w-full flex-1">
           <div className="flex justify-center rounded-md *:w-full">
             <iframe
               title="Availability Map"
-              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCX0wQIz-PYLHbUqQjBUz7w2XavcDT49VU&q=Halifax,NS,Canada&language=en-CA&region=CA"
+              src="https://www.google.com/maps/embed/v1/view?center=44.651070,-63.582687&zoom=10&language=en&key=AIzaSyCX0wQIz-PYLHbUqQjBUz7w2XavcDT49VU"
               width="600"
               height="340"
               allowFullScreen={true}
@@ -25,7 +26,8 @@ export default async function AvailableIn() {
               className="rounded-xl"
             />
           </div>
-        </div>
+        </div> */}
+        <ServiceMap />
       </div>
     </section>
   );
