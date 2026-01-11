@@ -24,7 +24,7 @@ export class JobberOAuth {
   static getAuthorizationUrl(redirectUri: string, state?: string): string {
     const params = new URLSearchParams({
       response_type: "code",
-      client_id: JOBBER_CLIENT_ID,
+      client_id: JOBBER_CLIENT_ID ?? "",
       redirect_uri: redirectUri,
     });
 
@@ -45,8 +45,8 @@ export class JobberOAuth {
       const response = await axios.post(
         this.TOKEN_ENDPOINT,
         new URLSearchParams({
-          client_id: JOBBER_CLIENT_ID,
-          client_secret: JOBBER_CLIENT_SECRET,
+          client_id: JOBBER_CLIENT_ID ?? "",
+          client_secret: JOBBER_CLIENT_SECRET ?? "",
           grant_type: "authorization_code",
           code,
           redirect_uri: redirectUri,

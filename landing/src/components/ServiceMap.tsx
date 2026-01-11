@@ -5,12 +5,6 @@ import Script from "next/script";
 
 import { GOOGLE_MAPS_API_KEY } from "@/core/constants/common";
 
-declare global {
-  interface Window {
-    google?: typeof google;
-  }
-}
-
 const HALIFAX = { lat: 44.6488, lng: -63.5752 };
 const RADIUS_METERS = 25_000;
 
@@ -22,21 +16,23 @@ export default function ServiceMap() {
   const apiKey = GOOGLE_MAPS_API_KEY;
 
   const mapDivRef = useRef<HTMLDivElement | null>(null);
-  const mapRef = useRef<google.maps.Map | null>(null);
-  const circleRef = useRef<google.maps.Circle | null>(null);
+  const mapRef = useRef<HTMLDivElement | null>(null);
+  const circleRef = useRef<any>(null);
 
   const [scriptReady, setScriptReady] = useState(false);
+
+  const { maps } = (window as any).google;
 
   useEffect(() => {
     if (!scriptReady) return;
     if (!apiKey) return;
     if (!mapDivRef.current) return;
-    if (!window.google?.maps) return;
+    if (!(window as any).google?.maps) return;
 
     // Prevent double-init in React strict mode / renders
     if (mapRef.current) return;
 
-    const map = new window.google.maps.Map(mapDivRef.current, {
+    const map = new maps.Map(mapDivRef.current, {
       center: HALIFAX,
       zoom: DEFAULT_ZOOM,
       mapTypeId: "roadmap",
@@ -46,7 +42,7 @@ export default function ServiceMap() {
       mapTypeControl: false,
     });
 
-    const circle = new window.google.maps.Circle({
+    const circle = new maps.Circle({
       map,
       center: HALIFAX,
       radius: RADIUS_METERS,
